@@ -72,38 +72,12 @@ app.get("/secrets", async (req, res) => {
       console.log(err);
     }
 
-    //TODO: Update this to pull in the user secret to render in secrets.ejs
+
   } else {
     res.redirect("/login");
   }
 });
   
-
-
-// app.get("/secrets", async (req, res) => {
-//   console.log(req.user);
-
-//   ////////////////UPDATED GET SECRETS ROUTE/////////////////
-//   if (req.isAuthenticated()) {
-//     try {
-//       const result = await db.query(
-//         `SELECT secret FROM users WHERE email = $1`,
-//         [req.user.email]
-//       );
-//       console.log(result);
-//       const secret = result.rows[0].secret;
-//       if (secret) {
-//         res.render("secrets.ejs", { secret: secret });
-//       } else {
-//         res.render("secrets.ejs", { secret: "I have no secrets" });
-//       }
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   } else {
-//     res.redirect("/login");
-//   }
-// });
 
 app.get("/submit",function(req,res){
   if (req.isAuthenticated()) {
@@ -112,9 +86,6 @@ app.get("/submit",function(req,res){
     res.redirect("/login");
   }
 });
-
-//TODO: Add a get route for the submit button
-//Think about how the logic should work with authentication.
 
 app.get(
   "/auth/google",
@@ -172,8 +143,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-//TODO: Create the post route for submit.
-//Handle the submitted data and add it to the database
 app.post("/submit", async function (req, res) {
   const submittedSecret = req.body.secret;
   console.log(req.user);
